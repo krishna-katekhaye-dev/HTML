@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Class Example</title>
+</head>
+
+<body>
+    <script>
+        // Define a class
+        class Person {
+            // Constructor to initialize object properties
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            // Method to display details
+
+            displayInfo() {
+                document.write("Name: " + this.name + "<br>");
+                document.write("Age: " + this.age + "<br><br>");
+            }
+        }
+
+        // Create objects using the class
+        let p1 = new Person("Sourav", 23);
+        let p2 = new Person("AF", 21);
+
+        // Call the method
+        p1.displayInfo();
+        p2.displayInfo();
+    </script>
+</body>
+
+</html>

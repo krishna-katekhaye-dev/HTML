@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Please fill out the form below to register.</p>
+
+        <form action="/submit-registration" method="post">
+            
+            <fieldset>
+                <legend>Login Details</legend>
+                <div>
+                    <label for="name">Full Name:</label><br>
+                    <input type="text" id="name" name="user_name" required>
+                </div>
+                <br>
+                <div>
+                    <label for="email">Email Address:</label><br>
+                    <input type="email" id="email" name="user_email" required>
+                </div>
+                <br>
+                <div>
+                    <label for="pass">Create Password (min. 8 characters):</label><br>
+                    <input type="password" id="pass" name="user_password" minlength="8" required>
+                </div>
+                <br>
+                <div>
+                    <label for="confirm_pass">Confirm Password:</label><br>
+                    <input type="password" id="confirm_pass" name="confirm_password" required>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div>
+                    <label for="phone">Phone Number:</label><br>
+                    <input type="tel" id="phone" name="user_phone">
+                </div>
+                <br>
+                <div>
+                    <label for="dob">Date of Birth:</label><br>
+                    <input type="date" id="dob" name="user_dob">
+                </div>
+                <br>
+                <div>
+                    <p>Gender:</p>
+                    <label>
+                        <input type="radio" name="gender" value="male"> Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="female"> Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="other"> Other
+                    </label>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Agreement</legend>
+                <div>
+                    <label>
+                        <input type="checkbox" name="terms" required> I agree to the 
+                        <a href="#">terms and conditions</a>.
+                    </label>
+                </div>
+            </fieldset>
+            <br>
+            <div>
+                <button type="submit">Register</button>
+                <button type="reset">Clear Form</button>
+            </div>
+
+        </form>
+        </body>
+</html>

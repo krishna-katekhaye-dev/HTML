@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listeners and Handlers Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #output {
+            font-size: 20px;
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>JavaScript Event Listeners and Handlers</h2>
+
+    <button id="clickBtn">Click Me</button>
+    <button id="hoverBtn">Hover Over Me</button>
+    <button id="colorBtn">Change Background</button>
+
+    <p id="output">Try interacting with the buttons above!</p>
+
+    <script>
+        // Selecting HTML elements
+        const clickBtn = document.getElementById("clickBtn");
+        const hoverBtn = document.getElementById("hoverBtn");
+        const colorBtn = document.getElementById("colorBtn");
+        const output = document.getElementById("output");
+
+        // Handler for click event
+        function handleClick() {
+            output.textContent = "You clicked the button!";
+            output.style.color = "green";
+        }
+
+        // Handler for mouseover event
+        function handleMouseOver() {
+            output.textContent = "Mouse is over the button!";
+            output.style.color = "orange";
+        }
+
+        // Handler for changing background color
+        function changeBackground() {
+            const colors = ["#FFD700", "#ADD8E6", "#FFB6C1", "#90EE90", "#FFA07A"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        // Adding event listeners
+        clickBtn.addEventListener("click", handleClick);
+        hoverBtn.addEventListener("mouseover", handleMouseOver);
+        colorBtn.addEventListener("click", changeBackground);
+    </script>
+
+</body>
+
+</html>

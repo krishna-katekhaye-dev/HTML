@@ -1,0 +1,28 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: relative; /* Needed for transform to work well */
+    
+    /* 2. This is where we APPLY the animation */
+    animation-name: slide-and-color;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  /* 3. This is where we DEFINE the animation */
+  @keyframes slide-and-color {
+    
+    /* Start state */
+    from {
+      background-color: blue;
+      transform: translateX(0px);
+    }
+    
+    /* End state */
+    to {
+      background-color: red;
+      transform: translateX(300px);
+    }
+  }

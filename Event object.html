@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Object Example</title>
+</head>
+
+<body>
+    <h2>Event Object Example</h2>
+    <button id="btn">Click Me!</button>
+    <p id="output"></p>
+
+    <script>
+        const button = document.getElementById("btn");
+        const output = document.getElementById("output");
+
+        button.addEventListener("click", function (event) {
+            output.innerHTML =
+                "Event Type: " + event.type + "<br>" +
+                "Clicked Element: " + event.target.tagName + "<br>" +
+                "Mouse X: " + event.clientX + "<br>" +
+                "Mouse Y: " + event.clientY;
+        });
+    </script>
+</body>
+
+</html>

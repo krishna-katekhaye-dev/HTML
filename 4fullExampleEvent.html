@@ -1,0 +1,65 @@
+<!-- lucky rewatkar -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common HTML Events Example</title>
+</head>
+
+<body onload="pageLoaded()">
+
+    <h2>Common HTML Events</h2>
+
+    <!-- onchange -->
+    <label>Select a color:</label>
+    <select onchange="colorChanged()">
+        <option>Red</option>
+        <option>Green</option>
+        <option>Blue</option>
+    </select>
+    <br><br>
+
+    <!-- onclick -->
+    <button onclick="showMessage()">Click Me</button>
+    <br><br>
+
+    <!-- onmouseover / onmouseout -->
+    <p onmouseover="hoverEffect(this)" onmouseout="removeEffect(this)">
+        Move your mouse here!
+    </p>
+
+    <!-- onkeydown -->
+    <input type="text" placeholder="Press a key" onkeydown="keyPressed()">
+    <br><br>
+
+    <script>
+        function colorChanged() {
+            alert("You changed the color!");
+        }
+
+        function showMessage() {
+            alert("Button was clicked!");
+        }
+
+        function hoverEffect(x) {
+            x.style.color = "red";
+        }
+
+        function removeEffect(x) {
+            x.style.color = "black";
+        }
+
+        function keyPressed() {
+            alert("A key was pressed!");
+        }
+
+        function pageLoaded() {
+            alert("Page loaded successfully!");
+        }
+    </script>
+
+</body>
+
+</html>

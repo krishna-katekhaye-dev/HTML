@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Web Pages - Styled with Images</title>
+
+    <style>
+        /* ===== General Page Styling ===== */
+        body {
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #004d99;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        section {
+            background-color: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2 {
+            color: #004d99;
+            border-bottom: 2px solid #004d99;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        ul {
+            margin-left: 25px;
+        }
+
+        /* ===== Image Styling ===== */
+        img {
+            display: block;
+            margin: 15px auto;
+            border: 4px solid #004d99;
+            border-radius: 15px;
+            width: 70%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* ===== Form Styling ===== */
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            width: 48%;
+            margin-top: 15px;
+            background-color: #004d99;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #0073e6;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #004d99;
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+        }
+
+        /* ===== Responsive Image & Section Effects ===== */
+        @media (max-width: 600px) {
+            img {
+                width: 90%;
+            }
+        }
+
+        section:hover {
+            transform: scale(1.01);
+            transition: 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Our Business Portal</h1>
+        <nav>
+            <a href="#furniture">Furniture Mall</a> |
+            <a href="#spa">Spa</a> |
+            <a href="#travel">Travel Portal</a> |
+            <a href="#grievance">Grievance Portal</a> |
+            <a href="#register">User Registration</a>
+        </nav>
+    </header>
+
+    <!-- Furniture Mall Section -->
+    <section id="furniture">
+        <h2>Furniture Mall</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Furniture_store_display.jpg" alt="Furniture Mall">
+        <p>Welcome to our Furniture Mall! We provide a wide range of home and office furniture to fit every style and budget.</p>
+        <ul>
+            <li>Sofas and Recliners</li>
+            <li>Dining Tables and Chairs</li>
+            <li>Beds and Wardrobes</li>
+            <li>Office Furniture</li>
+        </ul>
+        <p>Contact: furniture@example.com | Phone: +91 9876543210</p>
+    </section>
+
+    <!-- Spa Section -->
+    <section id="spa">
+        <h2>Relax & Rejuvenate Spa</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Spa_room.jpg" alt="Spa Room">
+        <p>Escape from stress with our luxurious spa treatments designed for your wellness and relaxation.</p>
+        <ul>
+            <li>Full Body Massage</li>
+            <li>Facial Treatments</li>
+            <li>Aromatherapy</li>
+            <li>Steam and Sauna</li>
+        </ul>
+        <p>Contact: spa@example.com | Phone: +91 9123456780</p>
+    </section>
+
+    <!-- Travel Portal Section -->
+    <section id="travel">
+        <h2>Dream Travel Portal</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Airplane_view_from_window.jpg" alt="Travel Portal">
+        <p>Plan your perfect vacation with us! Find amazing tour packages, hotels, and flight deals.</p>
+        <ul>
+            <li>Domestic and International Packages</li>
+            <li>Flight and Hotel Bookings</li>
+            <li>Holiday Packages</li>
+            <li>Travel Insurance</li>
+        </ul>
+        <p>Contact: travel@example.com | Phone: +91 9000012345</p>
+    </section>
+
+    <!-- Citizen Grievance Handling Portal -->
+    <section id="grievance">
+        <h2>Citizen Grievance Handling Portal</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Citizen_feedback_box.jpg" alt="Grievance Portal">
+        <p>We value your feedback. Submit your issues or suggestions for a better community service experience.</p>
+
+        <form action="#" method="post">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="complaint">Complaint/Feedback:</label>
+            <textarea id="complaint" name="complaint" rows="4" cols="40"></textarea>
+
+            <input type="submit" value="Submit Complaint">
+        </form>
+    </section>
+
+    <!-- User Registration Form -->
+    <section id="register">
+        <h2>User Registration Form</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Online_registration_form.jpg" alt="User Registration">
+        <form action="#" method="post">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="emailreg">Email:</label>
+            <input type="email" id="emailreg" name="emailreg" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone">
+
+            <label for="business">Select Business:</label>
+            <select id="business" name="business">
+                <option value="furniture">Furniture Mall</option>
+                <option value="spa">Spa</option>
+                <option value="travel">Travel Portal</option>
+                <option value="grievance">Grievance Portal</option>
+            </select>
+
+            <input type="submit" value="Register">
+            <input type="reset" value="Reset">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Business Portal | All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

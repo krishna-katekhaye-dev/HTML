@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance Example</title>
+</head>
+
+<body>
+    <script>
+        // Parent Class
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+
+            speak() {
+                return `${this.name} makes a noise.`;
+            }
+        }
+
+        // Child Class (inherits from Animal)
+        class Dog extends Animal {
+            constructor(name, breed) {
+                super(name); // call parent constructor
+                this.breed = breed;
+            }
+
+            speak() {
+                return `${this.name} barks!`;
+            }
+        }
+
+        // Instantiation
+        const dog1 = new Dog("Tommy", "Labrador");
+
+        // Display output on webpage
+        document.write(dog1.speak() + "<br>");
+        document.write("Breed: " + dog1.breed);
+    </script>
+</body>
+
+</html>

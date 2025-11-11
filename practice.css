@@ -1,0 +1,50 @@
+body{
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #161c91;
+    }
+   /* 1. Style the element itself */
+.animated-box-container {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  
+  /* 2. Apply the animation */
+  /* This is the shorthand: 
+     animation: [name] [duration] [timing] [iteration-count] [direction]
+  */
+  animation: slide-and-color 4s infinite alternate;
+}
+
+
+/* 3. Define the animation steps with @keyframes */
+@keyframes slide-and-color {
+  /* Start state */
+  from {
+    background-color: blue;
+    transform: translateX(0px); /* 'translateX' is for moving left/right */
+  }
+  
+  /* End state */
+  to {
+    background-color: red;
+    transform: translateX(300px); /* Move 300px to the right */
+  }
+}
+.transition-box {
+  width: 150px;
+  padding: 20px;
+  background-color: lightblue;
+  
+  /* Tell the browser to animate any changes to 'background-color' 
+     and 'transform' over 0.3 seconds. */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* This is the state when the mouse is over the box */
+.transition-box:hover {
+  background-color: steelblue;
+  transform: scale(1.1); /* Makes the box 10% bigger */
+}
+    

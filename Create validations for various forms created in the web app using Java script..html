@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamWood Furniture Mall</title>
+  <!-- fixed: load external stylesheet correctly -->
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* small helper styles for validation messages (you can move these to style.css) */
+    .error-msg {
+      color: #b00020;
+      font-size: 0.9rem;
+      margin-top: 6px;
+      display: block;
+    }
+    .valid {
+      border-color: #2e7d32 !important;
+      box-shadow: 0 0 0 3px rgba(46,125,50,0.08);
+    }
+    .invalid {
+      border-color: #b00020 !important;
+      box-shadow: 0 0 0 3px rgba(176,0,32,0.06);
+    }
+    .small-note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 4px;
+    }
+    .pw-strength {
+      font-weight: 600;
+    }
+    .success-msg {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border: 1px solid #c8e6c9;
+    }
+  </style>
+</head>
+<body bgcolor="#f5f5f5" text="#333">
+
+  <header>
+    <center>
+      <h1>DreamWood Furniture Mall</h1>
+      <p><b>Your comfort, our craft.</b></p>
+      <hr width="80%">
+    </center>
+  </header>
+
+  <nav>
+    <center>
+      <a href="#home">Home</a> |
+      <a href="#about">About Us</a> |
+      <a href="product.html">Products</a> |
+      <a href="#contact">Contact</a>
+    </center>
+    <hr width="80%">
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to DreamWood</h2>
+    <p>We provide top-quality wooden furniture for homes, offices, and outdoor spaces. Explore our latest collection crafted with care and precision.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>DreamWood Furniture Mall is a trusted name in furniture design and craftsmanship. We have been serving happy customers since 1995, offering durable and stylish furniture for every need.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p><b>Address:</b> 21, Woodland Road, Nagpur, Maharashtra</p>
+    <p><b>Phone:</b> +91 98765 43210</p>
+    <p><b>Email:</b> info@dreamwoodmall.com</p>
+  </section>
+
+  <main>
+    <section id="registration" style="padding: 30px;">
+      <h2>Register</h2>
+
+      <!-- success message placeholder -->
+      <div id="form-success" style="display:none;" class="success-msg">
+        Registration validated — form ready to submit.
+      </div>
+
+      <p>Please fill out the form below to register.</p>
+
+      <form id="regForm" action="/submit-registration" method="post" novalidate>
+          
+        <fieldset>
+          <legend>Login Details</legend>
+
+          <div>
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="user_name" required>
+            <span class="error-msg" id="err-name"></span>
+          </div>
+          <br>
+
+          <div>
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="user_email" required>
+            <span class="error-msg" id="err-email"></span>
+          </div>
+          <br>
+
+          <div>
+            <label for="pass">Create Password (min. 8 characters):</label><br>
+            <input type="password" id="pass" name="user_password" minlength="8" required>
+            <span class="small-note">Use letters, numbers and a symbol for stronger password.</span>
+            <div class="small-note pw-strength" id="pw-strength"></div>
+            <span class="error-msg" id="err-pass"></span>
+          </div>
+          <br>
+
+          <div>
+            <label for="confirm_pass">Confirm Password:</label><br>
+            <input type="password" id="confirm_pass" name="confirm_password" required>
+            <span class="error-msg" id="err-confirm"></span>
+          </div>
+
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+          <legend>Personal Information</legend>
+
+          <div>
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="user_phone" placeholder="10 digit number">
+            <span class="error-msg" id="err-phone"></span>
+          </div>
+          <br>
+
+          <div>
+            <label for="dob">Date of Birth:</label><br>
+            <input type="date" id="dob" name="user_dob">
+            <span class="error-msg" id="err-dob"></span>
+          </div>
+          <br>
+
+          <div>
+            <p>Gender:</p>
+            <label><input type="radio" name="gender" value="male"> Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+            <label><input type="radio" name="gender" value="other"> Other</label>
+            <span class="error-msg" id="err-gender"></span>
+          </div>
+
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+          <legend>Agreement</legend>
+          <div>
+            <label>
+              <input type="checkbox" id="terms" name="terms" required> I agree to the 
+              <a href="#">terms and conditions</a>.
+            </label>
+            <span class="error-msg" id="err-terms"></span>
+          </div>
+        </fieldset>
+
+        <br>
+
+        <div style="display:flex; gap:10px;">
+          <button type="submit" id="submitBtn">Register</button>
+          <button type="reset" id="resetBtn">Clear Form</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <hr width="80%">
+    <center>
+      <p>&copy; 2025 DreamWood Furniture Mall | All Rights Reserved</p>
+    </center>
+  </footer>
+
+  <!-- ===== Internal JavaScript: validation & event listeners ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('regForm');
+
+      const nameEl = document.getElementById('name');
+      const emailEl = document.getElementById('email');
+      const passEl = document.getElementById('pass');
+      const confirmEl = document.getElementById('confirm_pass');
+      const phoneEl = document.getElementById('phone');
+      const dobEl = document.getElementById('dob');
+      const termsEl = document.getElementById('terms');
+      const genderEls = Array.from(document.getElementsByName('gender'));
+
+      const err = {
+        name: document.getElementById('err-name'),
+        email: document.getElementById('err-email'),
+        pass: document.getElementById('err-pass'),
+        confirm: document.getElementById('err-confirm'),
+        phone: document.getElementById('err-phone'),
+        dob: document.getElementById('err-dob'),
+        gender: document.getElementById('err-gender'),
+        terms: document.getElementById('err-terms')
+      };
+
+      const successBox = document.getElementById('form-success');
+      const pwStrengthText = document.getElementById('pw-strength');
+
+      // Email regex (simple & practical)
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // Phone: Indian 10-digit number (loose: digits only)
+      function isValidPhone(phone) {
+        return /^\d{10}$/.test(phone);
+      }
+
+      // Age check: must be >= 16 (change to 18 if you prefer)
+      function calculateAge(dobValue) {
+        if (!dobValue) return null;
+        const today = new Date();
+        const dob = new Date(dobValue);
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+        return age;
+      }
+
+      // Password strength (simple)
+      function passwordStrength(pw) {
+        let score = 0;
+        if (pw.length >= 8) score++;
+        if (/[A-Z]/.test(pw)) score++;
+        if (/[a-z]/.test(pw)) score++;
+        if (/\d/.test(pw)) score++;
+        if (/[^A-Za-z0-9]/.test(pw)) score++;
+        return score; // 0-5
+      }
+
+      function showError(el, message) {
+        el.textContent = message;
+      }
+
+      function clearError(el) {
+        el.textContent = '';
+      }
+
+      function markValidField(field) {
+        field.classList.remove('invalid');
+        field.classList.add('valid');
+      }
+
+      function markInvalidField(field) {
+        field.classList.remove('valid');
+        field.classList.add('invalid');
+      }
+
+      // live validation listeners
+      nameEl.addEventListener('input', () => {
+        if (nameEl.value.trim().length >= 3) {
+          clearError(err.name);
+          markValidField(nameEl);
+        } else {
+          showError(err.name, 'Please enter at least 3 characters.');
+          markInvalidField(nameEl);
+        }
+      });
+
+      emailEl.addEventListener('input', () => {
+        if (isValidEmail(emailEl.value.trim())) {
+          clearError(err.email);
+          markValidField(emailEl);
+        } else {
+          showError(err.email, 'Enter a valid email address.');
+          markInvalidField(emailEl);
+        }
+      });
+
+      passEl.addEventListener('input', () => {
+        const pw = passEl.value;
+        const score = passwordStrength(pw);
+        let label = '';
+        if (score <= 1) label = 'Very weak';
+        else if (score === 2) label = 'Weak';
+        else if (score === 3) label = 'Fair';
+        else if (score === 4) label = 'Good';
+        else label = 'Strong';
+        pwStrengthText.textContent = 'Password strength: ' + label;
+        if (pw.length >= 8) {
+          clearError(err.pass);
+          markValidField(passEl);
+        } else {
+          showError(err.pass, 'Password must be at least 8 characters.');
+          markInvalidField(passEl);
+        }
+      });
+
+      confirmEl.addEventListener('input', () => {
+        if (confirmEl.value === passEl.value) {
+          clearError(err.confirm);
+          markValidField(confirmEl);
+        } else {
+          showError(err.confirm, 'Passwords do not match.');
+          markInvalidField(confirmEl);
+        }
+      });
+
+      phoneEl.addEventListener('input', () => {
+        const val = phoneEl.value.trim();
+        if (val === '') {
+          clearError(err.phone);
+          phoneEl.classList.remove('valid', 'invalid');
+          return;
+        }
+        if (isValidPhone(val)) {
+          clearError(err.phone);
+          markValidField(phoneEl);
+        } else {
+          showError(err.phone, 'Enter a valid 10-digit phone number (digits only).');
+          markInvalidField(phoneEl);
+        }
+      });
+
+      dobEl.addEventListener('change', () => {
+        const age = calculateAge(dobEl.value);
+        if (age === null) {
+          clearError(err.dob);
+          dobEl.classList.remove('valid', 'invalid');
+          return;
+        }
+        if (age >= 16) {
+          clearError(err.dob);
+          markValidField(dobEl);
+        } else {
+          showError(err.dob, 'You must be at least 16 years old to register.');
+          markInvalidField(dobEl);
+        }
+      });
+
+      // On reset: clear errors & styling
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        Object.values(err).forEach(e => e.textContent = '');
+        [nameEl,emailEl,passEl,confirmEl,phoneEl,dobEl].forEach(i => i.classList.remove('valid','invalid'));
+        pwStrengthText.textContent = '';
+        successBox.style.display = 'none';
+      });
+
+      // Final validation on submit
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); // prevent actual submit for validation demo
+
+        let valid = true;
+        successBox.style.display = 'none';
+
+        // name
+        if (nameEl.value.trim().length < 3) {
+          showError(err.name, 'Please enter your full name (min 3 chars).');
+          markInvalidField(nameEl);
+          valid = false;
+        } else {
+          clearError(err.name);
+          markValidField(nameEl);
+        }
+
+        // email
+        if (!isValidEmail(emailEl.value.trim())) {
+          showError(err.email, 'Enter a valid email address.');
+          markInvalidField(emailEl);
+          valid = false;
+        } else {
+          clearError(err.email);
+          markValidField(emailEl);
+        }
+
+        // password
+        if (passEl.value.length < 8) {
+          showError(err.pass, 'Password must be at least 8 characters long.');
+          markInvalidField(passEl);
+          valid = false;
+        } else {
+          clearError(err.pass);
+          markValidField(passEl);
+        }
+
+        // confirm
+        if (confirmEl.value !== passEl.value || confirmEl.value === '') {
+          showError(err.confirm, 'Passwords do not match.');
+          markInvalidField(confirmEl);
+          valid = false;
+        } else {
+          clearError(err.confirm);
+          markValidField(confirmEl);
+        }
+
+        // phone optional but if provided must be valid
+        if (phoneEl.value.trim() !== '' && !isValidPhone(phoneEl.value.trim())) {
+          showError(err.phone, 'Enter a valid 10-digit phone number.');
+          markInvalidField(phoneEl);
+          valid = false;
+        } else {
+          clearError(err.phone);
+          if (phoneEl.value.trim() !== '') markValidField(phoneEl);
+          else phoneEl.classList.remove('valid','invalid');
+        }
+
+        // dob optional but if provided must be >=16
+        if (dobEl.value) {
+          const age = calculateAge(dobEl.value);
+          if (age === null || age < 16) {
+            showError(err.dob, 'You must be at least 16 years old to register.');
+            markInvalidField(dobEl);
+            valid = false;
+          } else {
+            clearError(err.dob);
+            markValidField(dobEl);
+          }
+        } else {
+          clearError(err.dob);
+          dobEl.classList.remove('valid','invalid');
+        }
+
+        // gender: ensure one selected
+        const genderSelected = genderEls.some(r => r.checked);
+        if (!genderSelected) {
+          showError(err.gender, 'Please select your gender.');
+          valid = false;
+        } else {
+          clearError(err.gender);
+        }
+
+        // terms checkbox
+        if (!termsEl.checked) {
+          showError(err.terms, 'You must agree to the terms and conditions.');
+          valid = false;
+        } else {
+          clearError(err.terms);
+        }
+
+        if (valid) {
+          // everything OK -> show success message (replace with actual submit if desired)
+          successBox.style.display = 'block';
+          successBox.textContent = 'All fields look good. Form validated — you can now submit.';
+          // If you want to actually submit to the server uncomment the next line:
+          // form.submit();
+        } else {
+          // scroll first error into view
+          const firstError = document.querySelector('.error-msg:not(:empty)');
+          if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+
+    }); // DOMContentLoaded end
+  </script>
+
+</body>
+</html>

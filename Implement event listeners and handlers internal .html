@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamWood Furniture Mall - Register</title>
+  <!-- if you have an external CSS file, keep this line; make sure style.css exists -->
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Minimal inline styles so the page looks OK even without external CSS */
+    body {
+      background: #f5f5f5;
+      color: #333;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      line-height: 1.4;
+      padding: 20px;
+    }
+    header { text-align:center; margin-bottom: 12px; }
+    h1 { color: #8b5e3c; margin-bottom: 6px; }
+    section { max-width: 900px; margin: 0 auto 18px; background: #fff; padding: 18px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.06) }
+    form { max-width: 700px; margin: 0 auto; }
+    fieldset { border: 1px solid #e0d2c4; padding: 12px 16px; border-radius: 8px; margin-bottom: 14px; }
+    legend { color: #8b5e3c; font-weight: 600; padding: 0 6px; }
+    label { font-weight: 600; display:block; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="date"] {
+      width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 10px;
+    }
+    .row { display:flex; gap: 16px; }
+    .col { flex: 1; }
+    .small { font-size: 0.9rem; color:#555; margin-bottom: 8px; }
+    .hint { font-size: 0.9rem; color:#b33; }
+    .success { font-size: 0.95rem; color: #136f14; background: #e6f6e6; padding:10px; border-radius:6px; margin-top:10px; display:none; }
+    .error { font-size: 0.95rem; color: #7a1400; background: #ffecec; padding:8px; border-radius:6px; margin-top:8px; display:none; }
+    .ps-strength { font-weight:600; margin-top: -6px; margin-bottom: 8px; }
+    .actions { display:flex; gap:10px; justify-content:flex-start; margin-top:10px; }
+    button { padding:10px 16px; border-radius:6px; border: none; cursor:pointer; background:#8b5e3c; color:white; font-weight:600; }
+    button:disabled { opacity:0.6; cursor:not-allowed; }
+    .toggle-pass { margin-left:8px; font-size:0.9rem; cursor:pointer; color:#5a3825; background:none; border:none; padding:0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DreamWood Furniture Mall</h1>
+    <p><b>Your comfort, our craft.</b></p>
+  </header>
+
+  <section id="contact">
+    <h2>Register</h2>
+    <p class="small">Please fill out the form below to create an account. (This demo saves data to your browser storage only.)</p>
+
+    <form id="registrationForm" novalidate>
+      <fieldset>
+        <legend>Login Details</legend>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="user_name" required autocomplete="name" />
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="user_email" required autocomplete="email" />
+
+        <div class="row">
+          <div class="col">
+            <label for="pass">Create Password (min. 8 characters):</label>
+            <input type="password" id="pass" name="user_password" minlength="8" required autocomplete="new-password" />
+          </div>
+          <div class="col">
+            <label for="confirm_pass">Confirm Password:</label>
+            <input type="password" id="confirm_pass" name="confirm_password" required autocomplete="new-password" />
+          </div>
+        </div>
+
+        <div class="ps-strength" id="psStrength">Password strength: <span id="psStrengthLabel">—</span></div>
+        <div class="hint" id="passHint" style="display:none">Passwords don't match or are too short.</div>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Personal Information</legend>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="user_phone" placeholder="+91 9876543210" />
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="user_dob" />
+
+        <p style="margin-top:8px">Gender:</p>
+        <label><input type="radio" name="gender" value="male"> Male</label>
+        <label style="margin-left:10px"><input type="radio" name="gender" value="female"> Female</label>
+        <label style="margin-left:10px"><input type="radio" name="gender" value="other"> Other</label>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Agreement</legend>
+        <label>
+          <input type="checkbox" id="terms" name="terms" /> I agree to the
+          <a href="#" target="_blank" rel="noopener">terms and conditions</a>.
+        </label>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" id="submitBtn" disabled>Register</button>
+        <button type="reset" id="resetBtn" type="reset">Clear Form</button>
+
+        <!-- show/hide password toggle (internal control) -->
+        <button type="button" class="toggle-pass" id="togglePassBtn">Show passwords</button>
+      </div>
+
+      <div class="error" id="formError" role="alert"></div>
+      <div class="success" id="formSuccess" role="status"></div>
+    </form>
+  </section>
+
+  <script>
+    (function () {
+      // Elements
+      const form = document.getElementById('registrationForm');
+      const pass = document.getElementById('pass');
+      const confirmPass = document.getElementById('confirm_pass');
+      const passHint = document.getElementById('passHint');
+      const psStrengthLabel = document.getElementById('psStrengthLabel');
+      const terms = document.getElementById('terms');
+      const submitBtn = document.getElementById('submitBtn');
+      const phone = document.getElementById('phone');
+      const formError = document.getElementById('formError');
+      const formSuccess = document.getElementById('formSuccess');
+      const togglePassBtn = document.getElementById('togglePassBtn');
+
+      // Utility: basic password strength (very simple)
+      function passwordStrength(pw) {
+        let score = 0;
+        if (pw.length >= 8) score++;
+        if (/[A-Z]/.test(pw)) score++;
+        if (/[0-9]/.test(pw)) score++;
+        if (/[^A-Za-z0-9]/.test(pw)) score++;
+        switch (score) {
+          case 0: return 'Too weak';
+          case 1: return 'Weak';
+          case 2: return 'Fair';
+          case 3: return 'Good';
+          case 4: return 'Strong';
+        }
+      }
+
+      // Enable/disable submit based on terms checkbox
+      terms.addEventListener('change', () => {
+        submitBtn.disabled = !terms.checked;
+      });
+
+      // Toggle show/hide passwords
+      togglePassBtn.addEventListener('click', () => {
+        const type = pass.type === 'password' ? 'text' : 'password';
+        pass.type = type;
+        confirmPass.type = type;
+        togglePassBtn.textContent = type === 'text' ? 'Hide passwords' : 'Show passwords';
+      });
+
+      // Real-time password validation
+      function validatePasswords() {
+        const pw = pass.value;
+        const cpw = confirmPass.value;
+        // strength
+        psStrengthLabel.textContent = passwordStrength(pw);
+        // match & length checks
+        if (pw.length === 0 && cpw.length === 0) {
+          passHint.style.display = 'none';
+          return true;
+        }
+        if (pw.length < 8) {
+          passHint.style.display = 'block';
+          passHint.textContent = 'Password must be at least 8 characters.';
+          return false;
+        }
+        if (pw !== cpw) {
+          passHint.style.display = 'block';
+          passHint.textContent = 'Passwords do not match.';
+          return false;
+        }
+        passHint.style.display = 'none';
+        return true;
+      }
+
+      pass.addEventListener('input', validatePasswords);
+      confirmPass.addEventListener('input', validatePasswords);
+
+      // Basic phone validation (accepts digits, spaces, +, -). For India: optional +91 or 10 digits.
+      function validatePhone(value) {
+        if (!value) return true; // optional
+        const cleaned = value.replace(/\s|-/g, '');
+        // Accept formats: +91XXXXXXXXXX or XXXXXXXXXX
+        return /^(\+91)?[6-9]\d{9}$/.test(cleaned);
+      }
+
+      // Save user to localStorage (mock)
+      function saveUserMock(userObj) {
+        try {
+          const key = 'dreamwood_users_v1';
+          const existing = JSON.parse(localStorage.getItem(key)) || [];
+          existing.push(userObj);
+          localStorage.setItem(key, JSON.stringify(existing));
+          return true;
+        } catch (e) {
+          console.error('Storage error', e);
+          return false;
+        }
+      }
+
+      // Submit handler
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        formError.style.display = 'none';
+        formSuccess.style.display = 'none';
+
+        // Basic built-in validity check
+        if (!form.checkValidity()) {
+          formError.style.display = 'block';
+          formError.textContent = 'Please complete all required fields correctly.';
+          return;
+        }
+
+        // Password checks
+        if (!validatePasswords()) {
+          formError.style.display = 'block';
+          formError.textContent = 'Please fix the password errors.';
+          return;
+        }
+
+        // Phone check
+        if (!validatePhone(phone.value)) {
+          formError.style.display = 'block';
+          formError.textContent = 'Please enter a valid phone number (10 digits, optionally +91).';
+          return;
+        }
+
+        // Terms checkbox
+        if (!terms.checked) {
+          formError.style.display = 'block';
+          formError.textContent = 'You must agree to the terms and conditions to register.';
+          return;
+        }
+
+        // Build user object (do not store password in real apps - this is a demo)
+        const user = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: phone.value.trim(),
+          dob: document.getElementById('dob').value || null,
+          gender: (document.querySelector('input[name="gender"]:checked') || {}).value || null,
+          registeredAt: new Date().toISOString()
+        };
+
+        const saved = saveUserMock(user);
+        if (!saved) {
+          formError.style.display = 'block';
+          formError.textContent = 'Could not save registration. Please try again (storage may be disabled).';
+          return;
+        }
+
+        // Success feedback
+        formSuccess.style.display = 'block';
+        formSuccess.textContent = `Registration successful! Welcome, ${user.name}. (Saved locally for demo.)`;
+
+        // Clear password fields for safety
+        pass.value = '';
+        confirmPass.value = '';
+        psStrengthLabel.textContent = '—';
+        passHint.style.display = 'none';
+
+        // Optionally reset the rest of the form after a short delay
+        setTimeout(() => {
+          form.reset();
+          submitBtn.disabled = true; // terms become unchecked
+        }, 1200);
+      });
+
+      // Reset handler: clear messages
+      document.getElementById('resetBtn').addEventListener('click', () => {
+        formError.style.display = 'none';
+        formSuccess.style.display = 'none';
+        passHint.style.display = 'none';
+        psStrengthLabel.textContent = '—';
+      });
+
+      // Accessibility: allow Enter on togglePassBtn
+      togglePassBtn.addEventListener('keyup', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') togglePassBtn.click();
+      });
+
+      // Initialize
+      submitBtn.disabled = !terms.checked;
+      psStrengthLabel.textContent = '—';
+    })();
+  </script>
+
+</body>
+</html>

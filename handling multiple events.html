@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Handling Multiple Events</title>
+</head>
+
+<body>
+    <h2>Handling Multiple Events Example</h2>
+    <button id="myBtn">Click or Hover Me!</button>
+
+    <p id="msg"></p>
+
+    <script>
+        const btn = document.getElementById("myBtn");
+        const msg = document.getElementById("msg");
+
+        // When button is clicked
+        btn.addEventListener("click", function () {
+            msg.innerHTML = "Button Clicked!";
+        });
+
+        // When mouse is over the button
+        btn.addEventListener("mouseover", function () {
+            msg.innerHTML = "Mouse is Over the Button!";
+        });
+
+        // When mouse leaves the button
+        btn.addEventListener("mouseout", function () {
+            msg.innerHTML = "Mouse Left the Button!";
+        });
+    </script>
+</body>
+
+</html>

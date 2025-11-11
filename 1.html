@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+    div{ background-color: lightblue ; width: 100px; 
+        border: 15px solid green; 
+        padding: 50px; 
+        margin: 20px; } </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="practice.css">
+</head>
+</head>
+<body>
+  <h2>The feOffset and feBlend Filters</h2>
+    <svg height="150" width="150">
+        <defs>
+            <filter id="f2" width="120" height="120">
+                <!-- shifts the position of the input image (or filter result) by a specified distance 
+                    along the x-axis (dx) and y-axis (dy). -->
+                <feOffset in="SourceGraphic" dx="20" dy="20" result="offOut" />
+                <feBlend in="SourceGraphic" in2="offOut" mode="normal" /><!-- combines two graphics together  -->
+            </filter>
+        </defs>
+        <rect width="50" height="50" stroke="black" stroke-width="3" fill="lightgreen" filter="url(#f2)" />
+        Sorry, your browser does not support inline SVG.
+    </svg>
+
+
+    <svg>
+        <filter id="shadow">]
+            <!-- stdDeviation: Controls how blurry the shadow is. -->
+            <!-- flood-opacity:controls the color fill of the shadow). -->
+            <feDropShadow dx="4" dy="4" stdDeviation="10" flood-color="red" flood-opacity="1.0" />
+
+        </filter>
+
+        <rect width="100" height="80" fill="skyblue" filter="url(#shadow)" />
+
+    </svg>
+<h2>SVG feGaussianBlur Filter</h2>
+
+    <svg height="100" width="100" style="border: 2PX solid yellow; ">
+        <defs>
+            <filter id="f1" x="0" y="0">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+            </filter>
+        </defs>
+        <rect width="50" height="50" fill="red" filter="url(#f1)" x="25" y="25" />
+        Sorry, your browser does not support inline SVG.
+    </svg>
+
+ 
+    <svg width="100px" height="100px" style="border: 2px solid green" ;>
+        <!-- Graphics Effects -->
+        <!-- rounded corner  -->
+
+        <rect x="20" y="20" width="50" height="50" rx="20" fill="orange" />
+    </svg>
+    <!-- * Shadows -->
+    <svg>
+        <filter id="shadow">
+            <feDropShadow dx="4" dy="4" stdDeviation="30" flood-color="gray" />
+        </filter>
+        <rect width="100" height="80" fill="skyblue" filter="url(#shadow)" />
+
+    </svg>
+    <!-- Transapancy -->
+    <svg>
+        <circle cx="600" cy="600" r="40"0 fill="red" opacity="100" />
+    </svg>
+    <!-- 4. Background Gradients -->
+    <h3>Background Gradients</h3>
+    <svg>
+        <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <!-- The <feOffset> to move the shape. -->
+                <stop offset="50%" stop-color="orange" />
+                <stop offset="50%" stop-color="red" />
+            </linearGradient>
+        </defs>
+        <rect width="200" height="100" fill="url(#grad)" />
+    </svg>
+    <svg>
+        <!-- Typography -->
+        <text x="30" y="75" font-size="30" fill="red">SVG Text Example</text>
+    </svg>
+    <header>
+        <img src="apple.webp" alt="our company logo"   
+        width="100" height="100">
+        <nav>
+    <a href="1.html">home</a>
+    <a href="practice.html">about</a>
+    <a href="12.html">contact</a>
+</nav>
+     <h1> my web page </h1>  #tag is used for the largest heading.
+   <h2> my web page </h2>  #tag is used for the second largest heading.
+    <h3> my web page </h3>  #tag is used for the third largest heading.
+    <h4> my web page </h4>  #tag is used for the fourth largest heading.
+    <h5> my web page </h5>  #tag is used for the fifth largest heading.
+    <h6> my web page </h6>  #tag is used for the smallest heading.
+
+<P style="color:rgb(101, 54, 54);background-color:rgba(18, 18, 19, 0.97);text-align:center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, nihil.
+         Eligendi, laborum.<b> Molestias</b> deserunt, debitis ad animi ducimus tempora 
+         numquam, facere eligendi dolor quisquam veniam nam aut nulla eius aspernatur
+          officiis, harum magnam impedit placeat perspiciatis maiores doloribus maxime?
+           Excepturi officia consequuntur nemo quos assumenda placeat atque odit incidunt
+            quam aliquid veniam, recusandae non accusamus corrupti ab dolor rem optio suscipit 
+            commodi illum, <strong>quas culpa</strong>. Error magni explicabo sint consequuntur consectetur quaerat
+             dolorem voluptates! Labore officiis quasi nemo, aspernatur neque nostrum quisquam suscipit aliquid dolorum eum, 
+             hic quod facere at <i>inventore</i> nulla tenetur deleniti repellat explicabo. Distinctio sit ducimus nisi? Ipsam quae fugit sed commodi, tenetur ipsa recusandae odit quasi est sit repudiandae aliquam fuga iusto voluptatem adipisci aliquid ratione nam, ducimus placeat repellendus ab harum omnis culpa! Soluta dicta animi explicabo reiciendis quisquam, officiis ratione consequatur obcaecati nostrum blanditiis, mollitia aliquam aspernatur tenetur expedita architecto. Explicabo aspernatur, unde amet libero, nemo ad, temporibus quaerat deleniti officiis accusantium praesentium modi doloremque impedit distinctio! Similique blanditiis commodi labore totam est nostrum beatae dignissimos quis, perspiciatis temporibus vitae saepe dolorum incidunt
+              architecto deleniti obcaecati maxime veniam eligendi animi expedita soluta necessitatibus unde quam accusamus. Ex error nihil corrupti recusandae nemo neque est officia, voluptate asperiores molestiae voluptatum labore tempore a eos, itaque illo suscipit ipsam perferendis quod at reiciendis eum? Laudantium animi quae velit. Officia quisquam voluptates alias facere ratione expedita quas reiciendis sequi labore fugiat nesciunt quaerat amet mollitia eum, cupiditate provident? Commodi vitae tempora porro soluta accusantium dolorum nihil, mollitia illo quasi repellendus, possimus reprehenderit eveniet aperiam ullam libero fugiat rerum qui recusandae harum a. Ullam quia, laborum ut quo ducimus nihil, nesciunt similique iure alias dolor ipsum libero
+              <em> itaque at eveniet.</em> Facilis nemo asperiores totam.<mark> Alias accusantium </mark>vitae ipsa fuga aliquam facere fugit consequatur veritatis porro eaque repellat temporibus libero adipisci repellendus eligendi laudantium iure repudiandae, voluptatem odio minus officia necessitatibus sapiente cumque distinctio? Velit, mollitia est, asperiores ut quo dicta consequuntur libero, accusantium modi eveniet provident! Consectetur quas sapiente voluptates ad dolore velit repellendus, rerum praesentium fugiat rem officia maxime quo cum fugit sed quia deleniti sunt eum. Repellat reiciendis dicta tempora quia cupiditate, ratione sint a praesentium. In dolor expedita beatae neque maxime. Dolore ea amet natus ad recusandae porro sint tempore nemo consequatur cupiditate eos, omnis adipisci magni, quas velit. Provident repellat earum, alias dolorem ex dolores soluta numquam eligendi tempora perspiciatis eius quis consectetur quam aliquid id, laborum nulla accusantium. Maxime mollitia consequuntur est at molestias in illum, suscipit cupiditate laborum, incidunt, autem atque quae nobis! Odit voluptatum unde placeat nostrum voluptatem aut incidunt, illo enim nam quod officia itaque fugiat, mollitia reiciendis exercitationem repudiandae nisi tempora dolor voluptate nesciunt adipisci, saepe eos. Esse molestiae fugiat non? Iure fuga mollitia quaerat ut consequuntur eligendi, magni beatae consequatur maiores accusantium, quibusdam esse harum temporibus illum quo neque molestias delectus! Itaque ipsa quaerat labore saepe, ab iure laborum nostrum, est maiores quam nam
+         laudantium<small>doloremque neque </small>corporis eius ratione suscipit reprehenderit exercitationem a earum aspernatur. Libero, corrupti.</P>      #tag is used for paragraph.
+    <b>my web page</b>      #tag is used to make text bold.
+    <i>my web  page</i>     #tag is used to make text italic. 
+    <u>my web page</u>      #tag is used to underline text.
+    <br>                     #tag is used to create a line break.
+    <table border ="10">                  #tag is used to create a table.
+        <tr>                 #tag is used to create a row in a table.
+            <th>name</th>   #tag is used to create a header cell in a table.
+            <th>age</th>
+        </tr>
+        <tr>
+            <td>abc</td>    #tag is used to create a standard cell in a table.
+            <td>20</td>
+        </tr>
+        </table>
+     (a+b)<sup>3</sup>
+        (a-b)<sub>3</sub>
+        <ul>
+            <li>html</li>
+            <li>css</li>
+            <li>javascript</li> #tag is used to create an unordered list.
+        </ul>
+        <ol type="i">   #type attribute is used to specify the type of numbering.
+            <li>html</li>
+            <li>css</li>
+            <li>javascript</li> #tag is used to create an ordered list.
+         </ol>
+        <article>
+         <h2>New iPhone Model Released</h2>
+         <p>Apple announced its latest iPhone today with several new features...</p>
+  <a href="https://en.wikipedia.org/wiki/Apple_Inc">Read more</a>
+    </article>
+        <h2>About Our Company</h2>
+    <p>We were founded in 1995 with a mission to...</p>
+</section>
+<main>
+  <article>
+    <h2>How to Learn Web Development</h2>
+    <p>The first step is learning HTML...</p>
+  </article>
+  <aside>
+    <h3>Did You Know?</h3>
+    <p>The first website went live in 1991.</p>
+
+  </aside>
+</main>
+   
+
+
+    <a href="https://www.google.com">google</a>  #tag is used to create a hyperlink.
+            <a href="https://www.facebook.com">facebook</a>
+            <a href="https://youtu.be/kXHiIxx2atA?si=VofpLBK1CtQLI7bH">youtube</a>   #tag is used to create a hyperlink.
+            <img src="image.webp" alt="A person sitting at a desk using a laptop, surrounded by books and notes, appearing focused and engaged in learning web development. The background shows a bright, organized workspace with motivational posters. Text on the screen reads HTML Practice. The overall mood is productive and encouraging." width="100" height="100"> #tag is used to embed an image in a webpage.
+   <marquee>
+  This text will scroll across the screen from right to left!
+</marquee>
+
+<marquee direction="up">
+  This text will scroll up.
+</marquee>
+
+<marquee behavior="alternate">
+  This text will bounce back and forth.
+</marquee>
+<article>
+         <h2>New iPhone Model Released</h2>
+         <p>Apple announced its latest iPhone today with several new features...</p>
+  <a href="#">Read more</a>
+    </article>
+    <section>
+        <h2>About Our Company</h2>
+    <p>We were founded in 1995 with a mission to...</p>
+</section>
+    <main>
+  <article>
+    <h2>How to Learn Web Development</h2>
+    <p>The first step is learning HTML...</p>
+  </article>
+  <aside>
+    <h3>Did You Know?</h3>
+    <p>The first website went live in 1991.</p>
+  </aside>
+</main>
+<footer>
+  <p>&copy; 2025 My Website. All rights reserved.</p>
+  <p><a href="https://www.apple.com/in/">About Us</a></p>
+</footer>
+    <div class=" animited box-container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
+<div class="transition-box">
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>    
+</div>
+
+ <video width="320" height="240" controls>
+      <source src="Raabta (Kehte Hain Khuda) Full Song With Lyrics _ Agent Vinod _ Saif Ali Khan, Kareena Kapoor,Pritam.mp4" controls type="video/mp4">
+    </video>
+<audio width="320" height="240" controls>
+    <source src="rabta.mp3" type="audio/mp3">
+    <audio controls>
+    <source src="rabta.mp3" type="audio/mp3">
+ </audio>
+ </body>
+</html>

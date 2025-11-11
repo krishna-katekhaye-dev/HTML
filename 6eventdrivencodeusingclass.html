@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Driven and Custom Class Example</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f3f3f3;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🚗 Event Driven Programming with Custom Class</h1>
+    <p>Click the buttons to perform actions on the car.</p>
+
+    <button onclick="startCar()">Start Car</button>
+    <button onclick="stopCar()">Stop Car</button>
+    <button onclick="accelerateCar()">Accelerate</button>
+
+    <p id="output">Car is ready!</p>
+
+    <script>
+        // --- Custom Class ---
+        class Car {
+            constructor(brand) {
+                this.brand = brand;
+                this.speed = 0;
+            }
+
+            start() {
+                return `${this.brand} is started!`;
+            }
+
+            stop() {
+                this.speed = 0;
+                return `${this.brand} has stopped.`;
+            }
+
+            accelerate() {
+                this.speed += 10;
+                return `${this.brand} is running at ${this.speed} km/h.`;
+            }
+        }
+
+        // --- Event-driven Logic ---
+        const myCar = new Car("Tesla");
+
+        function startCar() {
+            document.getElementById("output").innerHTML = myCar.start();
+        }
+
+        function stopCar() {
+            document.getElementById("output").innerHTML = myCar.stop();
+        }
+
+        function accelerateCar() {
+            document.getElementById("output").innerHTML = myCar.accelerate();
+        }
+    </script>
+
+</body>
+
+</html>

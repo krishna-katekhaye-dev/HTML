@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Graphics and Animation</title>
+    <style>
+        canvas {
+            border: 2px solid black;
+            background-color: #f2f2f2;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align:center;">HTML5 Canvas Example: Shape, Color, Transform & Animation</h2>
+    <canvas id="myCanvas" width="500" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        /* core method behind all Canvas drawing and animation. */
+        const ctx = canvas.getContext("2d");
+
+        // 1️⃣ Draw Rectangle
+        /*The fillStyle property in the Canvas API defines the color, gradient, or pattern used to fill shapes drawn on the canvas.*/
+        ctx.beginPath();
+        ctx.fillStyle = "lightblue";
+        ctx.fillRect(50, 50, 100, 70);
+
+        // 2️⃣ Draw Circle
+        ctx.beginPath();
+        ctx.arc(300, 100, 40, 0, 2 * Math.PI);
+        ctx.fillStyle = "orange";
+        ctx.fill();
+        ctx.stroke();
+
+        // 3️⃣ Draw Line
+        ctx.beginPath();
+        ctx.moveTo(50, 200);
+        ctx.lineTo(200, 300);
+
+
+        
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // 4️⃣ Apply Transformations (Translate, Rotate, Scale)
+        ctx.save();  // Save current state
+
+        ctx.translate(400, 250);     // Move origin
+        ctx.rotate(Math.PI / 6);     // Rotate 30 degrees
+        ctx.scale(1.5, 1);           // Stretch horizontally
+        ctx.fillStyle = "green";
+        ctx.fillRect(-25, -25, 50, 50); // Draw rotated rectangle
+
+        ctx.restore(); // Restore to original
+
+        // 5️⃣ Animation (Moving Circle)
+        let x = 50;
+        function animate() {
+            ctx.clearRect(0, 350, 500, 50); // Clear bottom area
+            ctx.beginPath();
+            ctx.arc(x, 375, 20, 0, 2 * Math.PI);
+            ctx.fillStyle = "purple";
+            ctx.fill();
+            x += 2;
+            if (x > 500) x = 0;
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // 6️⃣ Interactivity (Mouse Click Draws a Circle)
+        canvas.addEventListener("click", function (event) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 15, 0, 2 * Math.PI);
+            ctx.fillStyle = "red";
+            ctx.fill();
+        });
+    </script>
+</body>
+
+</html>

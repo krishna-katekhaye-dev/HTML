@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Prep Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .tab-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .tab-inactive {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .menu-hidden {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .menu-visible {
+            max-height: 200px; /* Adjust based on content */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <header class="hero-bg text-white shadow-lg">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">Disaster Prep Hub</div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul id="nav-menu" class="hidden md:flex space-x-6">
+                <li><a href="#home" class="hover:text-gray-300 transition">Home</a></li>
+                <li><a href="#disasters" class="hover:text-gray-300 transition">Disasters</a></li>
+                <li><a href="#resources" class="hover:text-gray-300 transition">Resources</a></li>
+                <li><a href="#about" class="hover:text-gray-300 transition">About</a></li>
+                <li><a href="#contact" class="hover:text-gray-300 transition">Contact</a></li>
+            </ul>
+        </nav>
+        <section id="home" class="container mx-auto px-4 py-16 text-center fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Prepare, Protect, Prevail</h1>
+            <p class="text-xl md:text-2xl mb-8">Empowering Students and Teachers in Disaster Prevention and Management</p>
+            <div class="mb-8">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/abe4f3a1-7ba8-4de2-b879-d619e5d9f783.png" alt="Group of diverse students and teachers engaged in a disaster preparedness drill, practicing evacuation in a simulated earthquake scenario with safety gear and educational posters on walls" class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg" />
+            </div>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition">Start Learning Now</button>
+        </section>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <section id="disasters" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Types of Disasters</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/160e6173-5912-46eb-b1f3-52c8a4c7dcbc.png" alt="Detailed illustration of an earthquake with shaking ground, cracked buildings, and people taking cover under desks" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Earthquakes</h3>
+                    <p class="text-gray-600">Learn about seismic activity, building safety tips, and emergency response protocols.</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e8cf094-f783-4ac8-9a7b-05c5dcb7a104.png" alt="Stormy weather scene with heavy rain, flooding streets, and people using boats for rescue operations" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Floods</h3>
+                    <p class="text-gray-600">Understand flood risks, evacuation plans, and water safety measures.</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7f7fdc57-283e-4240-9093-d523c04dd0f6.png" alt="Wildfire raging through forest with firefighters battling flames and animals fleeing" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Wildfires</h3>
+                    <p class="text-gray-600">Details on fire prevention, smoke inhalation risks, and community response.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Educational Resources</h2>
+            <div class="tabs flex justify-center space-x-4 mb-8">
+                <button id="students-tab" class="py-2 px-6 rounded-full font-semibold tab-active">For Students</button>
+                <button id="teachers-tab" class="py-2 px-6 rounded-full font-semibold tab-inactive">For Teachers</button>
+            </div>
+            <div id="students-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68f8b133-3978-489b-9340-9e99b8dc5e9b.png" alt="Colorful interactive quiz game interface on a tablet showing disaster scenarios and multiple choice questions" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Interactive Quizzes</h3>
+                    <p class="text-gray-600">Test your knowledge with fun quizzes on disaster preparedness.</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/585e677c-e126-41f9-9149-4b833e140919.png" alt="Group of students making posters with drawings of emergency kits and safety symbols" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">DIY Activities</h3>
+                    <p class="text-gray-600">Hands-on projects to build emergency kits and posters.</p>
+                </div>
+            </div>
+            <div id="teachers-content" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2822878c-7359-4b82-8958-84888991f7f6.png" alt="Teacher standing in classroom with lesson plan charts and slides on disaster management displayed" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Lesson Plans</h3>
+                    <p class="text-gray-600">Ready-to-use plans for integrating disaster education into curricula.</p>
+                </div>
+                <div class="bg-white rounded-lg p-6 card-hover shadow-md">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/45ed62ae-e71a-461c-b6b2-77690221c5ea.png" alt="Multiple-choice survey form on screen for feedback with disaster preparedness questions" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+                    <h3 class="text-2xl font-semibold mb-2 text-gray-700">Assessment Tools</h3>
+                    <p class="text-gray-600">Tools to gauge student understanding and gather feedback.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2023 Disaster Prep Hub. Empowering Education Through Preparedness.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#contact" class="hover:text-gray-300 transition">Contact Us</a>
+                <a href="#" class="hover:text-gray-300 transition">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-300 transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to handle image load failures with fallback
+        function handleImageError(img) {
+            img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjQTBBMEEwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+QmFja3VwPC90ZXh0Pgo8c3ZnPg==';
+            img.alt = 'Backup image available';
+        }
+
+        // Add error handlers to all images
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('error', () => handleImageError(img));
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('menu-hidden');
+            navMenu.classList.toggle('menu-visible');
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Tab switching logic
+        const studentsTab = document.getElementById('students-tab');
+        const teachersTab = document.getElementById('teachers-tab');
+        const studentsContent = document.getElementById('students-content');
+        const teachersContent = document.getElementById('teachers-content');
+
+        studentsTab.addEventListener('click', () => {
+            studentsTab.classList.add('tab-active');
+            studentsTab.classList.remove('tab-inactive');
+            teachersTab.classList.add('tab-inactive');
+            teachersTab.classList.remove('tab-active');
+            studentsContent.classList.remove('hidden');
+            teachersContent.classList.add('hidden');
+        });
+
+        teachersTab.addEventListener('click', () => {
+            teachersTab.classList.add('tab-active');
+            teachersTab.classList.remove('tab-inactive');
+            studentsTab.classList.add('tab-inactive');
+            studentsTab.classList.remove('tab-active');
+            teachersContent.classList.remove('hidden');
+            studentsContent.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
+
+

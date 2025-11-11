@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone with Cart</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">amazon</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search Amazon">
+            <button>Search</button>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Sign in</a>
+            <a href="#">Orders</a>
+            <div class="cart-container">
+                <a href="#">Cart</a>
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-section">
+            <h2>Deals on Electronics</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8c21hcnQlMjB3YXRjaHx8fHx8fDE3MDA1NjcwNTc&ixlib=rb-4.0.3&q=80&w=400" alt="Smart Watch">
+                    <h3>Smart Watch</h3>
+                    <div class="price">$199.99</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aGVhZHBob25lc3x8fHx8fDE3MDA1NjcxMjc&ixlib=rb-4.0.3&q=80&w=400" alt="Wireless Headphones">
+                    <h3>Wireless Headphones</h3>
+                    <div class="price">$89.99</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                 <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGFwdG9wfHwwfHx8fDE3MDA1NjcyMDM&ixlib=rb-4.0.3&q=80&w=400" alt="Laptop">
+                    <h3>Laptop</h3>
+                    <div class="price">$799.00</div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <div class="checkout-container">
+            <button id="checkout-btn" style="display: none;">Proceed to Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 1996-2025, Amazon.com, Inc. or its affiliates</p>
+    </footer>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Payment Information</h2>
+            <form id="payment-form">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1111-2222-3333-4444" required>
+                
+                <label for="card-holder">Card Holder Name</label>
+                <input type="text" id="card-holder" placeholder="John Doe" required>
+                
+                <div class="form-row">
+                    <div>
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                    </div>
+                    <div>
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="pay-btn">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            const cartCountElement = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const paymentModal = document.getElementById('payment-modal');
+            const closeModalBtn = document.querySelector('.close-btn');
+            const paymentForm = document.getElementById('payment-form');
+
+            let itemCount = 0;
+
+            // --- Add to Cart Logic ---
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    itemCount++;
+                    cartCountElement.textContent = itemCount;
+                    cartCountElement.style.display = 'inline-block';
+                    
+                    // Show checkout button
+                    if (itemCount > 0) {
+                        checkoutBtn.style.display = 'block';
+                    }
+                });
+            });
+
+            // --- Modal Logic ---
+            // Show modal when checkout button is clicked
+            checkoutBtn.addEventListener('click', () => {
+                paymentModal.style.display = 'block';
+            });
+
+            // Hide modal when the 'x' is clicked
+            closeModalBtn.addEventListener('click', () => {
+                paymentModal.style.display = 'none';
+            });
+
+            // Hide modal if user clicks outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target == paymentModal) {
+                    paymentModal.style.display = 'none';
+                }
+            });
+
+            // --- Fake Payment Submission ---
+            paymentForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevents the form from actually submitting
+                alert('Thank you for your payment! (This is a simulation)');
+                paymentModal.style.display = 'none';
+                
+                // Reset cart after payment
+                itemCount = 0;
+                cartCountElement.textContent = itemCount;
+                cartCountElement.style.display = 'none';
+                checkoutBtn.style.display = 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>

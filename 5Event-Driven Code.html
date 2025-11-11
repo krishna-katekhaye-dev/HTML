@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Driven Example</title>
+    <a rel="stylesheet" href="2.css">
+</head>
+
+<body>
+
+    <h2>Event-Driven Programming Example</h2>
+
+    <!-- Button to trigger an event -->
+    <button id="myButton">Click Me</button>
+
+    <!-- Paragraph where we will show result -->
+    <p id="message"></p>
+
+    <script>
+        // Step 1: Find the button element
+        let btn = document.getElementById("myButton");
+
+        // Step 2: Add an event listener for "click" event
+        btn.addEventListener("click", showMessage);
+
+        // Step 3: Define what happens when the event occurs
+        function showMessage() {
+            document.getElementById("message").innerHTML = "🎉 You clicked the button!";
+        }
+    </script>
+
+</body>
+
+</html>

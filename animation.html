@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CSS Filters and Form Validation Example</title>
+    <style>
+        /* --- Apply CSS Filters to Image --- */
+        img {
+            width: 300px;
+            height: 200px;
+            filter: blur(50px);
+            filter: brightness(120%) contrast(110%) grayscale(30%);
+
+            border-radius: 10px;
+        }
+
+        /* Basic styling for form */
+        form {
+            margin-top: 20px;
+            background-color: #f3f3f3;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 95%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🌈 CSS Filter + Validation Example</h2>
+
+    <!-- Image with CSS Filters -->
+    <img src="image.jpeg" alt="Filtered Image">
+
+    <!-- Form with Validation and Pattern -->
+    <form>
+        <label>Full Name:</label><br>
+        <input type="text" pattern="[A-Za-z ]+" required title="Only letters and spaces allowed"><br>
+
+        <label>Email:</label><br>
+
+        <input type="email" required title="Enter a valid email"><br>
+        <h3>Pattren attribute (Regular expression) </h3>
+        <label>Phone Number:</label><br>
+        <input type="text" pattern="[0-9]{10}" required title="Enter 10-digit number"><br>
+
+        <label>Age:</label><br>
+        <input type="number" min="18" max="60" required title="Age must be between 18 and 60"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+
+</html>
