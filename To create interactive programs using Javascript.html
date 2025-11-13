@@ -1,349 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DreamWood Furniture Mall</title>
-  <!-- Correct link to external CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Furniture Mall — Interactive Demo</title>
+  <style>
+    :root{--accent:#6b5b95;--muted:#f5f5f7;--card:#ffffff;--danger:#e63946}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, Arial; margin:0; background:linear-gradient(180deg,#fafafa,var(--muted)); color:#222}
+    header{background:linear-gradient(90deg,var(--accent),#8b6fb8); color:white; padding:18px 20px; display:flex;align-items:center;gap:16px}
+    header h1{font-size:20px;margin:0}
+    .container{max-width:1100px;margin:20px auto;padding:0 16px}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+    .search{flex:1;display:flex}
+    .search input{flex:1;padding:10px 12px;border-radius:8px;border:1px solid #ddd}
+    .filters{display:flex;gap:8px}
+    select,input[type=range]{padding:8px;border-radius:8px;border:1px solid #ddd}
+    .layout{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(17,17,17,0.06);display:flex;flex-direction:column}
+    .thumb{height:150px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:8px}
+    .title{font-weight:600;margin:0 0 6px 0}
+    .muted{color:#666;font-size:13px}
+    .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    button{background:var(--accent);color:white;padding:8px 10px;border-radius:8px;border:0;cursor:pointer}
+    button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(107,91,149,0.12)}
+    .cart{background:#fff;border-radius:12px;padding:12px;height:fit-content;box-shadow:0 6px 18px rgba(17,17,17,0.06)}
+    .cart h3{margin:0 0 8px 0}
+    .cart-item{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+    .cart-item img{width:56px;height:46px;object-fit:cover;border-radius:6px}
+    .qty{display:flex;align-items:center;gap:6px}
+    .total{font-weight:700;font-size:18px;margin-top:10px}
+    .empty{color:#999;padding:20px;text-align:center}
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center}
+    .modal.open{display:flex}
+    .modal-card{width:min(920px,95%);background:white;border-radius:12px;padding:18px;display:grid;grid-template-columns:1fr 320px;gap:16px}
+    .gallery{display:flex;gap:8px}
+    .gallery img{width:100%;border-radius:8px}
+    .thumbs{display:flex;gap:8px;margin-top:8px}
+    .thumbs img{width:60px;height:48px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
+    .thumbs img.active{border-color:var(--accent)}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}.modal-card{grid-template-columns:1fr}}
+  </style>
 </head>
-<body bgcolor="#f5f5f5" text="#333">
-
+<body>
   <header>
-    <center>
-      <h1>DreamWood Furniture Mall</h1>
-      <p><b>Your comfort, our craft.</b></p>
-      <hr width="80%">
-    </center>
+    <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=80&auto=format&fit=crop&ixlib=rb-4.0.3&s=5f6b8bd6224f0a3f3b2a0e7f4c5e6c12" alt="logo" style="width:44px;height:44px;border-radius:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.12)">
+    <h1>Furniture Mall</h1>
+    <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
+      <div id="live-count" style="background:rgba(255,255,255,0.12);padding:6px 10px;border-radius:8px;font-weight:600">0 items</div>
+      <button id="view-cart">View Cart</button>
+    </div>
   </header>
 
-  <nav>
-    <center>
-      <a href="#home">Home</a> |
-      <a href="#about">About Us</a> |
-      <a href="product.html">Products</a> |
-      <a href="#contact">Contact</a>
-    </center>
-    <hr width="80%">
-  </nav>
-
-  <section id="home">
-    <h2>Welcome to DreamWood</h2>
-    <p>We provide top-quality wooden furniture for homes, offices, and outdoor spaces. Explore our latest collection crafted with care and precision.</p>
-  </section>
-
-  <section id="about">
-    <h2>About Us</h2>
-    <p>DreamWood Furniture Mall is a trusted name in furniture design and craftsmanship. We have been serving happy customers since 1995, offering durable and stylish furniture for every need.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p><b>Address:</b> 21, Woodland Road, Nagpur, Maharashtra</p>
-    <p><b>Phone:</b> +91 98765 43210</p>
-    <p><b>Email:</b> info@dreamwoodmall.com</p>
-  </section>
-
-  <p>Please fill out the form below to register.</p>
-
-  <form id="registerForm" action="/submit-registration" method="post" novalidate>
-    <fieldset>
-      <legend>Login Details</legend>
-
-      <div class="form-row">
-        <label for="name">Full Name:</label><br>
-        <input type="text" id="name" name="user_name" required>
-        <div class="error" id="error-name" aria-live="polite"></div>
+  <main class="container">
+    <div class="controls">
+      <div class="search">
+        <input id="search" placeholder="Search sofas, chairs, tables..." />
       </div>
-      <br>
-
-      <div class="form-row">
-        <label for="email">Email Address:</label><br>
-        <input type="email" id="email" name="user_email" required>
-        <div class="error" id="error-email" aria-live="polite"></div>
-      </div>
-      <br>
-
-      <div class="form-row">
-        <label for="pass">Create Password (min. 8 characters):</label><br>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="password" id="pass" name="user_password" minlength="8" required>
-          <button type="button" id="togglePass" aria-pressed="false" title="Show/Hide password">Show</button>
+      <div class="filters">
+        <select id="category">
+          <option value="all">All Categories</option>
+          <option value="sofa">Sofas</option>
+          <option value="chair">Chairs</option>
+          <option value="table">Tables</option>
+          <option value="bed">Beds</option>
+        </select>
+        <select id="sort">
+          <option value="popular">Sort: Popular</option>
+          <option value="price-asc">Price ↑</option>
+          <option value="price-desc">Price ↓</option>
+        </select>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label class="muted">Max price</label>
+          <input id="price" type="range" min="500" max="50000" step="100" value="50000" />
         </div>
-        <meter id="passStrength" min="0" max="4" value="0" style="width:100%; margin-top:6px;"></meter>
-        <div class="error" id="error-pass" aria-live="polite"></div>
       </div>
-      <br>
-
-      <div class="form-row">
-        <label for="confirm_pass">Confirm Password:</label><br>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="password" id="confirm_pass" name="confirm_password" required>
-          <button type="button" id="toggleConfirm" aria-pressed="false" title="Show/Hide password">Show</button>
-        </div>
-        <div class="error" id="error-confirm" aria-live="polite"></div>
-      </div>
-
-    </fieldset>
-
-    <br>
-
-    <fieldset>
-      <legend>Personal Information</legend>
-
-      <div class="form-row">
-        <label for="phone">Phone Number:</label><br>
-        <input type="tel" id="phone" name="user_phone" placeholder="+91XXXXXXXXXX">
-        <div class="error" id="error-phone" aria-live="polite"></div>
-      </div>
-      <br>
-
-      <div class="form-row">
-        <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="user_dob" max="">
-        <div class="error" id="error-dob" aria-live="polite"></div>
-      </div>
-      <br>
-
-      <div>
-        <p>Gender:</p>
-        <label><input type="radio" name="gender" value="male"> Male</label>
-        <label><input type="radio" name="gender" value="female"> Female</label>
-        <label><input type="radio" name="gender" value="other"> Other</label>
-      </div>
-
-    </fieldset>
-
-    <br>
-
-    <fieldset>
-      <legend>Agreement</legend>
-      <div>
-        <label>
-          <input type="checkbox" id="terms" name="terms" required> I agree to the
-          <a href="#" target="_blank">terms and conditions</a>.
-        </label>
-      </div>
-      <div class="error" id="error-terms" aria-live="polite"></div>
-    </fieldset>
-
-    <br>
-
-    <div style="display:flex;gap:10px;">
-      <button id="submitBtn" type="submit" disabled>Register</button>
-      <button type="reset" id="resetBtn">Clear Form</button>
     </div>
 
-    <div id="formMessage" role="status" aria-live="polite" style="margin-top:12px;"></div>
-  </form>
+    <div class="layout">
+      <section>
+        <div id="products" class="products"></div>
+        <div id="no-results" class="empty" style="display:none">No items match your search.</div>
+      </section>
 
-  <footer>
-    <hr width="80%">
-    <center>
-      <p>&copy; 2025 DreamWood Furniture Mall | All Rights Reserved</p>
-    </center>
-  </footer>
+      <aside class="cart">
+        <h3>Cart</h3>
+        <div id="cart-list"></div>
+        <div id="cart-empty" class="empty">Your cart is empty.</div>
+        <div id="cart-summary" style="display:none">
+          <div class="total">Total: ₹<span id="cart-total">0</span></div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button id="checkout">Checkout</button>
+            <button id="clear-cart" class="ghost">Clear</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
 
-  <!-- Internal JavaScript: event listeners & handlers -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-card">
+      <div>
+        <div id="modal-main-img" class="gallery"></div>
+        <div id="modal-thumbs" class="thumbs"></div>
+      </div>
+      <div>
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc" class="muted"></p>
+        <div style="margin-top:12px;font-size:18px;font-weight:700">₹ <span id="modal-price"></span></div>
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+          <div class="qty">
+            <button id="dec" class="ghost">-</button>
+            <div id="qty">1</div>
+            <button id="inc" class="ghost">+</button>
+          </div>
+          <button id="add-to-cart">Add to Cart</button>
+        </div>
+        <div style="margin-top:18px">
+          <button id="close-modal" class="ghost">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Elements
-      const form = document.getElementById('registerForm');
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      const passInput = document.getElementById('pass');
-      const confirmInput = document.getElementById('confirm_pass');
-      const phoneInput = document.getElementById('phone');
-      const dobInput = document.getElementById('dob');
-      const termsCheckbox = document.getElementById('terms');
-      const submitBtn = document.getElementById('submitBtn');
-      const resetBtn = document.getElementById('resetBtn');
-      const formMessage = document.getElementById('formMessage');
-      const passStrength = document.getElementById('passStrength');
+    // Sample product data
+    const PRODUCTS = [
+      {id:1,title:'Elegant 3-Seater Sofa',category:'sofa',price:15999,desc:'Comfortable fabric sofa with modern wooden legs.',images:[
+        'https://images.unsplash.com/photo-1616627988422-2c57b2b6e0a6?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1598300054739-38d83f3b1a1c?q=80&w=1200&auto=format&fit=crop'
+      ]},
+      {id:2,title:'Minimal Wooden Chair',category:'chair',price:3499,desc:'Solid oak chair — sturdy and stylish.',images:[
+        'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop'
+      ]},
+      {id:3,title:'Round Dining Table',category:'table',price:8999,desc:'Perfect for small dining areas, seats 4 comfortably.',images:[
+        'https://images.unsplash.com/photo-1567016432779-75ad2a89396b?q=80&w=1200&auto=format&fit=crop'
+      ]},
+      {id:4,title:'King Size Bed',category:'bed',price:21999,desc:'Luxury king bed with storage drawers.',images:[
+        'https://images.unsplash.com/photo-1601933479221-8b6d7d8d3f4c?q=80&w=1200&auto=format&fit=crop'
+      ]},
+      {id:5,title:'Accent Armchair',category:'chair',price:4999,desc:'Velvet armchair that adds color to any room.',images:[
+        '
+      ]},
+      {id:6,title:'Coffee Table — Marble Top',category:'table',price:6799,desc:'Sleek marble top with metal legs.',images:[
+        'https://images.unsplash.com/photo-1598300054739-38d83f3b1a1c?q=80&w=1200&auto=format&fit=crop'
+      ]}
+    ];
 
-      const errorName = document.getElementById('error-name');
-      const errorEmail = document.getElementById('error-email');
-      const errorPass = document.getElementById('error-pass');
-      const errorConfirm = document.getElementById('error-confirm');
-      const errorPhone = document.getElementById('error-phone');
-      const errorDob = document.getElementById('error-dob');
-      const errorTerms = document.getElementById('error-terms');
+    // App state
+    let state = {
+      products: PRODUCTS.slice(),
+      cart: JSON.parse(localStorage.getItem('fm_cart')||'{}'),
+      modalQty:1,
+      modalProduct:null
+    };
 
-      // Set max DOB to today - 13 years (basic age guard)
-      (function setMaxDOB() {
-        const today = new Date();
-        const year = today.getFullYear() - 13;
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        dobInput.max = `${year}-${month}-${day}`;
-      })();
+    // Helpers
+    const el = id => document.getElementById(id);
 
-      // Simple validators
-      function validateEmail(email) {
-        // basic regex, fine for UI validation (not authoritative)
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      }
+    function formatPrice(n){return n.toLocaleString('en-IN')}
 
-      function validatePhone(phone) {
-        // Accepts 10 digit Indian numbers, optionally prefixed with +91 or 0
-        const cleaned = phone.replace(/\s+/g, '');
-        return /^(?:\+91|0)?[6-9]\d{9}$/.test(cleaned);
-      }
+    // Render products
+    function renderProducts(){
+      const container = el('products');
+      container.innerHTML = '';
+      const q = el('search').value.trim().toLowerCase();
+      const cat = el('category').value;
+      const maxPrice = +el('price').value;
+      let filtered = state.products.filter(p=>{
+        if(cat!=='all' && p.category!==cat) return false;
+        if(p.price>maxPrice) return false;
+        if(q && !(p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))) return false;
+        return true;
+      });
+      const sort = el('sort').value;
+      if(sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
+      if(sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
 
-      function passwordStrengthScore(pw) {
-        let score = 0;
-        if (pw.length >= 8) score++;
-        if (/[A-Z]/.test(pw)) score++;
-        if (/[0-9]/.test(pw)) score++;
-        if (/[\W_]/.test(pw)) score++;
-        return score; // 0..4
-      }
+      if(filtered.length===0){el('no-results').style.display='block';} else{el('no-results').style.display='none'}
 
-      // Toggle show/hide password buttons
-      function setupToggle(btnId, inputEl) {
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
-        btn.addEventListener('click', function () {
-          const isText = inputEl.type === 'text';
-          inputEl.type = isText ? 'password' : 'text';
-          btn.textContent = isText ? 'Show' : 'Hide';
-          btn.setAttribute('aria-pressed', String(!isText));
-        });
-      }
-      setupToggle('togglePass', passInput);
-      setupToggle('toggleConfirm', confirmInput);
+      filtered.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        const thumb = document.createElement('div'); thumb.className='thumb'; thumb.style.backgroundImage=`url(${p.images[0]})`;
+        card.appendChild(thumb);
+        const t = document.createElement('h3'); t.className='title'; t.textContent = p.title; card.appendChild(t);
+        const d = document.createElement('div'); d.className='muted'; d.textContent = p.desc; card.appendChild(d);
+        const row = document.createElement('div'); row.className='row';
+        const price = document.createElement('div'); price.textContent = '₹ ' + formatPrice(p.price); row.appendChild(price);
+        const actions = document.createElement('div');
+        const view = document.createElement('button'); view.textContent='View'; view.onclick = ()=>openModal(p.id);
+        actions.appendChild(view);
+        row.appendChild(actions);
+        card.appendChild(row);
+        container.appendChild(card);
+      });
+    }
 
-      // Real-time validation handlers
-      emailInput.addEventListener('input', () => {
-        if (!emailInput.value) {
-          errorEmail.textContent = '';
-          return;
-        }
-        errorEmail.textContent = validateEmail(emailInput.value) ? '' : 'Enter a valid email address.';
+    // Cart functions
+    function saveCart(){localStorage.setItem('fm_cart',JSON.stringify(state.cart));}
+    function addToCart(id,qty=1){
+      state.cart[id] = (state.cart[id]||0) + qty;
+      saveCart(); renderCart(); updateLiveCount();
+    }
+    function removeFromCart(id){delete state.cart[id]; saveCart(); renderCart(); updateLiveCount();}
+    function clearCart(){state.cart={}; saveCart(); renderCart(); updateLiveCount();}
+
+    function renderCart(){
+      const list = el('cart-list'); list.innerHTML='';
+      const ids = Object.keys(state.cart).map(Number);
+      if(ids.length===0){el('cart-empty').style.display='block'; el('cart-summary').style.display='none'; return}
+      el('cart-empty').style.display='none'; el('cart-summary').style.display='block';
+      let total=0;
+      ids.forEach(id=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        const q = state.cart[id];
+        total += p.price*q;
+        const row = document.createElement('div'); row.className='cart-item';
+        const img = document.createElement('img'); img.src=p.images[0]; row.appendChild(img);
+        const meta = document.createElement('div'); meta.style.flex='1';
+        meta.innerHTML = `<div style="font-weight:600">${p.title}</div><div class='muted'>₹ ${formatPrice(p.price)} x ${q}</div>`;
+        row.appendChild(meta);
+        const ctrl = document.createElement('div'); ctrl.style.display='flex'; ctrl.style.flexDirection='column'; ctrl.style.gap='6px';
+        const inc = document.createElement('button'); inc.textContent='+'; inc.onclick = ()=>{state.cart[id]++; saveCart(); renderCart(); updateLiveCount();};
+        const dec = document.createElement('button'); dec.textContent='-'; dec.onclick = ()=>{state.cart[id]--; if(state.cart[id]<=0) removeFromCart(id); else{saveCart(); renderCart(); updateLiveCount();}};
+        const del = document.createElement('button'); del.textContent='Remove'; del.className='ghost'; del.onclick = ()=>removeFromCart(id);
+        ctrl.appendChild(inc); ctrl.appendChild(dec); ctrl.appendChild(del);
+        row.appendChild(ctrl);
+        list.appendChild(row);
+      });
+      el('cart-total').textContent = formatPrice(total);
+    }
+
+    function updateLiveCount(){
+      const count = Object.values(state.cart).reduce((s,n)=>s+n,0);
+      el('live-count').textContent = `${count} item${count!==1?'s':''}`;
+    }
+
+    // Modal
+    function openModal(id){
+      const p = PRODUCTS.find(x=>x.id===id); state.modalProduct = p; state.modalQty = 1;
+      el('modal-title').textContent = p.title; el('modal-desc').textContent = p.desc; el('modal-price').textContent = formatPrice(p.price);
+      el('qty').textContent = state.modalQty;
+      // images
+      const main = el('modal-main-img'); main.innerHTML = '';
+      const img = document.createElement('img'); img.src = p.images[0]; img.style.maxHeight='320px'; img.style.width='100%'; main.appendChild(img);
+      const thumbs = el('modal-thumbs'); thumbs.innerHTML = '';
+      p.images.forEach((src,idx)=>{ const t = document.createElement('img'); t.src=src; if(idx===0) t.classList.add('active'); t.onclick = ()=>{ main.querySelector('img').src = src; thumbs.querySelectorAll('img').forEach(x=>x.classList.remove('active')); t.classList.add('active'); } ; thumbs.appendChild(t); });
+      el('modal').classList.add('open'); el('modal').setAttribute('aria-hidden','false');
+    }
+
+    // Wire UI events
+    document.addEventListener('DOMContentLoaded',()=>{
+      el('search').addEventListener('input',renderProducts);
+      el('category').addEventListener('change',renderProducts);
+      el('sort').addEventListener('change',renderProducts);
+      el('price').addEventListener('input',renderProducts);
+      el('view-cart').addEventListener('click',()=>{window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})});
+      el('clear-cart').addEventListener('click',clearCart);
+      el('checkout').addEventListener('click',()=>{
+        if(Object.keys(state.cart).length===0){alert('Your cart is empty');return}
+        alert('Checkout - thank you!\n(Checkout in this demo is a placeholder)'); clearCart();
       });
 
-      phoneInput.addEventListener('input', () => {
-        if (!phoneInput.value) { errorPhone.textContent = ''; return; }
-        errorPhone.textContent = validatePhone(phoneInput.value) ? '' : 'Enter a valid 10-digit Indian phone number.';
-      });
+      // modal controls
+      el('close-modal').addEventListener('click',()=>{el('modal').classList.remove('open'); el('modal').setAttribute('aria-hidden','true')});
+      el('inc').addEventListener('click',()=>{state.modalQty++; el('qty').textContent=state.modalQty});
+      el('dec').addEventListener('click',()=>{ if(state.modalQty>1) state.modalQty--; el('qty').textContent=state.modalQty });
+      el('add-to-cart').addEventListener('click',()=>{ addToCart(state.modalProduct.id, state.modalQty); el('modal').classList.remove('open'); el('modal').setAttribute('aria-hidden','true')});
 
-      passInput.addEventListener('input', () => {
-        const val = passInput.value;
-        const score = passwordStrengthScore(val);
-        passStrength.value = score;
-        let msg = '';
-        if (val.length === 0) msg = '';
-        else if (val.length < 8) msg = 'Password must be at least 8 characters.';
-        else msg = (score <= 1) ? 'Weak password.' : (score === 2) ? 'Moderate password.' : (score >= 3) ? 'Strong password.' : '';
-        errorPass.textContent = msg;
-        // also check confirm match live
-        errorConfirm.textContent = (confirmInput.value && confirmInput.value !== val) ? 'Passwords do not match.' : '';
-        toggleSubmitState();
-      });
-
-      confirmInput.addEventListener('input', () => {
-        errorConfirm.textContent = (confirmInput.value !== passInput.value) ? 'Passwords do not match.' : '';
-        toggleSubmitState();
-      });
-
-      nameInput.addEventListener('input', () => {
-        errorName.textContent = nameInput.value.trim() ? '' : 'Please enter your full name.';
-      });
-
-      dobInput.addEventListener('change', () => {
-        if (!dobInput.value) {
-          errorDob.textContent = '';
-          return;
-        }
-        const selected = new Date(dobInput.value);
-        if (selected > new Date(dobInput.max)) {
-          errorDob.textContent = 'You must be at least 13 years old.';
-        } else {
-          errorDob.textContent = '';
-        }
-      });
-
-      termsCheckbox.addEventListener('change', () => {
-        errorTerms.textContent = termsCheckbox.checked ? '' : 'You must accept the terms to register.';
-        toggleSubmitState();
-      });
-
-      // Enable submit only when basic checks pass
-      function toggleSubmitState() {
-        const basicOk =
-          nameInput.value.trim() &&
-          validateEmail(emailInput.value) &&
-          passwordStrengthScore(passInput.value) >= 2 && // require at least "moderate"
-          passInput.value === confirmInput.value &&
-          termsCheckbox.checked;
-        submitBtn.disabled = !basicOk;
-      }
-
-      // Reset handler
-      resetBtn.addEventListener('click', () => {
-        // clear messages and password meter
-        errorName.textContent = errorEmail.textContent = errorPass.textContent = errorConfirm.textContent = errorPhone.textContent = errorDob.textContent = errorTerms.textContent = '';
-        formMessage.textContent = '';
-        passStrength.value = 0;
-        submitBtn.disabled = true;
-      });
-
-      // Final submit handler
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // Clear previous message
-        formMessage.textContent = '';
-        // Re-validate
-        let hasError = false;
-
-        if (!nameInput.value.trim()) { errorName.textContent = 'Enter your full name.'; hasError = true; }
-        if (!validateEmail(emailInput.value)) { errorEmail.textContent = 'Enter a valid email.'; hasError = true; }
-        if (passwordStrengthScore(passInput.value) < 2) { errorPass.textContent = 'Choose a stronger password (use uppercase, numbers, symbols).'; hasError = true; }
-        if (passInput.value !== confirmInput.value) { errorConfirm.textContent = 'Passwords do not match.'; hasError = true; }
-        if (phoneInput.value && !validatePhone(phoneInput.value)) { errorPhone.textContent = 'Enter a valid phone number.'; hasError = true; }
-        if (!termsCheckbox.checked) { errorTerms.textContent = 'You must accept the terms.'; hasError = true; }
-
-        if (hasError) {
-          formMessage.textContent = 'Please fix the highlighted errors and try again.';
-          formMessage.style.color = 'crimson';
-          return;
-        }
-
-        // Simulate successful submission (you can replace with fetch to server)
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Registering...';
-
-        // Simulate delay for UX
-        setTimeout(() => {
-          formMessage.textContent = 'Registration successful! Welcome to DreamWood ✨';
-          formMessage.style.color = '#2a7a2a';
-          form.reset();
-          passStrength.value = 0;
-          submitBtn.textContent = 'Register';
-          submitBtn.disabled = true; // user must re-check terms after reset
-        }, 900);
-      });
-
-      // Smooth scroll for nav links (progressive enhancement)
-      document.querySelectorAll('nav a[href^="#"]').forEach(a => {
-        a.addEventListener('click', function (ev) {
-          ev.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      });
-
-      // initial state
-      toggleSubmitState();
+      // init
+      renderProducts(); renderCart(); updateLiveCount();
     });
   </script>
-
-  <!-- Optional small styles for inline errors (if your external CSS doesn't include them) -->
-  <style>
-    .error { color: #b22222; font-size: 0.9rem; margin-top: 6px; }
-    #formMessage { font-weight: 600; }
-    button[disabled] { opacity: 0.6; cursor: not-allowed; }
-  </style>
-
 </body>
 </html>
